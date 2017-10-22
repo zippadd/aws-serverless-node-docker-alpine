@@ -1,5 +1,5 @@
 FROM node:6-stretch
-MAINTAINER ZipPadd
+LABEL maintainer="ZipPadd"
 
 ###Enable HTTPs support###
 RUN apt-get update
