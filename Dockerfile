@@ -24,4 +24,5 @@ RUN apt-get install -y yarn
 RUN apt-get install -y zip
 
 #AWS cli
-RUN apt-get install -y awscli
+RUN apt-get install python python-pip
+pip install awscli
