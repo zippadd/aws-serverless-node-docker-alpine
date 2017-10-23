@@ -32,4 +32,5 @@ RUN pip install awscli
 RUN aws configure set default.region us-west-2
 
 #AWS sam-local
+RUN npm install -g process-nextick-args
 RUN npm install -g aws-sam-local --unsafe-perm=true
