@@ -1,6 +1,12 @@
 FROM node:6-stretch
 LABEL maintainer="ZipPadd"
 
+###Clean up from source###
+
+#yarn
+RUN rm /usr/local/bin/yarn
+RUN rm /usr/local/bin/yarnpkg
+
 ###Enable HTTPs support###
 RUN apt-get update
 RUN apt-get install -y apt-transport-https
@@ -22,6 +28,7 @@ RUN npm install npm@latest -g
 
 #yarn
 RUN apt-get install -y yarn
+yarn version
 
 #zip
 RUN apt-get install -y zip
@@ -32,5 +39,5 @@ RUN pip install awscli
 RUN aws configure set default.region us-west-2
 
 #AWS sam-local
-RUN npm install -g process-nextick-args util-deprecate
+RUN yarn global add process-nextick-args
 RUN npm install -g aws-sam-local --unsafe-perm=true
