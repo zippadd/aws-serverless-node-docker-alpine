@@ -28,7 +28,6 @@ RUN npm install npm@latest -g
 
 #yarn
 RUN apt-get install -y yarn
-yarn version
 
 #zip
 RUN apt-get install -y zip
