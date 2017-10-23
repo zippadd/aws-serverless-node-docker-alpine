@@ -14,6 +14,9 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 ###Update packages###
 RUN apt-get update
 RUN apt-get -y upgrade
+RUN npm install npm@latest -g
+
+###Fix NPM Permissions###
 
 ###Install new packages###
 
@@ -26,3 +29,7 @@ RUN apt-get install -y zip
 #AWS cli
 RUN apt-get install -y python-pip
 RUN pip install awscli
+RUN aws configure set default.region us-west-2
+
+#AWS sam-local
+RUN npm install -g aws-sam-local --unsafe-perm=true
