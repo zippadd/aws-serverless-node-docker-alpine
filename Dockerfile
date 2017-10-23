@@ -38,5 +38,7 @@ RUN pip install awscli
 RUN aws configure set default.region us-west-2
 
 #AWS sam-local
-#RUN yarn global add process-nextick-args
-#RUN npm install -g aws-sam-local --unsafe-perm=true
+RUN wget -q https://github.com/awslabs/aws-sam-local/releases/download/v0.2.2/sam_0.2.2_linux_amd64.deb
+RUN apt-get install ./sam_0.2.2_linux_amd64.deb
+RUN sam --version
+RUN rm sam_0.2.2_linux_amd64.deb
