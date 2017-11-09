@@ -3,11 +3,10 @@ LABEL maintainer="ZipPadd"
 
 ###Update packages###
 RUN apk update && apk upgrade \
-    && npm install npm@latest -g && apk add --update openssl
-
+    && npm install npm@latest -g && apk add --update openssl \
 ###Install new packages###
 #yarn (remove current one)
-RUN rm /usr/local/bin/yarn && rm /usr/local/bin/yarnpkg \
+    && rm /usr/local/bin/yarn && rm /usr/local/bin/yarnpkg \
     && apk add yarn --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community --allow-untrusted \
 #zip
     && apk add zip \
