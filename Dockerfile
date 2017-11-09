@@ -1,4 +1,4 @@
-FROM node:6-stretch
+FROM node:6-alpine
 LABEL maintainer="ZipPadd"
 
 ###Clean up from source###
@@ -7,38 +7,34 @@ LABEL maintainer="ZipPadd"
 RUN rm /usr/local/bin/yarn
 RUN rm /usr/local/bin/yarnpkg
 
-###Enable HTTPs support###
-RUN apt-get update
-RUN apt-get install -y apt-transport-https
-
-###Add sources###
-
-#yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
 ###Update packages###
-RUN apt-get update
-RUN apt-get -y upgrade
+RUN apk update
+RUN apk upgrade
 RUN npm install npm@latest -g
-
-###Fix NPM Permissions###
+RUN apk add --update openssl
 
 ###Install new packages###
 
 #yarn
-RUN apt-get install -y yarn
+RUN apk add yarn --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community --allow-untrusted
 
 #zip
-RUN apt-get install -y zip
+RUN apk add zip
 
 #AWS cli
-RUN apt-get install -y python-pip
+RUN apk add py-pip
+RUN pip install --upgrade pip
 RUN pip install awscli
 RUN aws configure set default.region us-west-2
 
 #AWS sam-local
-RUN wget -q https://github.com/awslabs/aws-sam-local/releases/download/v0.2.2/sam_0.2.2_linux_amd64.deb
-RUN apt-get install ./sam_0.2.2_linux_amd64.deb
+RUN wget -q https://github.com/awslabs/aws-sam-local/releases/download/v0.2.2/sam_0.2.2_linux_amd64.tar.gz
+RUN gunzip sam_0.2.2_linux_amd64.tar.gz
+RUN mkdir /opt/sam
+RUN tar -xf sam_0.2.2_linux_amd64.tar -C /opt/sam
+RUN rm sam_0.2.2_linux_amd64.tar
+RUN apk add libc6-compat
+RUN ln -s /lib /lib64
+RUN ln -s /opt/sam/sam /usr/local/bin/sam
+RUN chmod +x /usr/local/bin/sam
 RUN sam --version
-RUN rm sam_0.2.2_linux_amd64.deb
