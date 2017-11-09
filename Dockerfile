@@ -1,5 +1,4 @@
 FROM node:6-alpine
-LABEL maintainer="ZipPadd"
 
 ###Update packages###
 RUN apk update && apk upgrade \
