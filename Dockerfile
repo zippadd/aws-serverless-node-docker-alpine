@@ -15,8 +15,9 @@ RUN apk update && apk upgrade \
 #AWS sam-local
     && apk add libc6-compat && ln -s /lib /lib64 \
     && mkdir /opt/sam \
-    && wget -q https://github.com/awslabs/aws-sam-local/releases/download/v0.2.4/sam_0.2.4_linux_amd64.tar.gz \
-    && gunzip sam_0.2.4_linux_amd64.tar.gz \
-    && tar -xf sam_0.2.4_linux_amd64.tar -C /opt/sam \
-    && rm sam_0.2.4_linux_amd64.tar \
+    && wget -q https://github.com/awslabs/aws-sam-local/releases/download/v0.2.2/sam_0.2.2_linux_amd64.tar.gz \
+    && gunzip sam_0.2.2_linux_amd64.tar.gz \
+    && tar -xf sam_0.2.2_linux_amd64.tar -C /opt/sam \
+    && rm sam_0.2.2_linux_amd64.tar \
     && ln -s /opt/sam/sam /usr/local/bin/sam && chmod +x /usr/local/bin/sam
+RUN sam
