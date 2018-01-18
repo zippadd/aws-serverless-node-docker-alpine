@@ -9,6 +9,8 @@ RUN apk update && apk upgrade \
     && apk add yarn --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community --allow-untrusted \
 #zip
     && apk add zip \
+#Parallel
+    && apk add parallel \
 #AWS cli
     && apk add py-pip && pip install --upgrade pip \
     && pip install awscli && aws configure set default.region us-west-2 \
