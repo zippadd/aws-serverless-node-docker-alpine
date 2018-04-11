@@ -22,4 +22,3 @@ RUN apk update && apk upgrade \
     && tar -xf sam_0.2.10_linux_amd64.tar -C /opt/sam \
     && rm sam_0.2.10_linux_amd64.tar \
     && ln -s /opt/sam/sam /usr/local/bin/sam && chmod +x /usr/local/bin/sam
-RUN sam
