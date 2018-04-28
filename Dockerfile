@@ -12,7 +12,7 @@ RUN apk update && apk upgrade \
 #Parallel
     && apk add parallel \
 #AWS cli
-    && apk add py-pip && pip install --upgrade pip \
+    && apk add py-pip && python -m pip install --upgrade pip \
     && pip install awscli && aws configure set default.region us-west-2 \
 #AWS sam-local
     && apk add libc6-compat && ln -s /lib /lib64 \
