@@ -4,4 +4,4 @@ services:
   - docker
 
 script:
-  - docker build -t zippadd/aws-serverless-node-docker-alpine
+  - docker build -t zippadd/aws-serverless-node-docker-alpine .
