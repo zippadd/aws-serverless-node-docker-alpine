@@ -1,4 +1,5 @@
-FROM node:8-alpine
+###Match AWS Lambda Node Version
+FROM node:8.10-alpine
 
 ###Update packages###
 RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
@@ -17,6 +18,11 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repo
     && apk add parallel \
 #AWS cli
     && apk add py-pip && python -m pip install --upgrade pip \
-    && pip install awscli && aws configure set default.region us-west-2 \
+    && pip install awscli && aws configure set default.region us-west-2 && aws configure set default.s3.max_concurrent_requests 50 \
 #AWS sam-local
-    && pip install aws-sam-cli
+    && pip install aws-sam-cli \
+#Global NPM packages
+#ESLint
+    && yarn global add eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard \
+    && yarn global add lerna \
+    && yarn global add jest
