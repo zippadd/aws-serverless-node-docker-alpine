@@ -1,28 +1,35 @@
 ###Match AWS Lambda Node Version
-FROM node:8.10-alpine
+FROM zippadd/node:8.10
 
 ###Update packages###
 RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
     && echo "@edgecommunity http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && apk update \
-    && apk upgrade \
     && apk add --upgrade apk-tools@edge \
-    && npm install npm@latest -g && apk add --update openssl \
+    && apk update \
+    && apk upgrade \
+    && npm install npm@latest -g \
 ###Install new packages###
-#yarn (remove current one)
-    && rm /usr/local/bin/yarn && rm /usr/local/bin/yarnpkg \
-    && apk add yarn@edgecommunity --update-cache --allow-untrusted \
-#zip
-    && apk add zip \
 #Parallel
     && apk add parallel \
 #AWS cli
-    && apk add py-pip && python -m pip install --upgrade pip \
-    && pip install awscli && aws configure set default.region us-west-2 && aws configure set default.s3.max_concurrent_requests 50 \
+    && apk add python3 \
+    && pip3 --no-cache-dir install --upgrade pip setuptools \
+    && pip3 --no-cache-dir install awscli && aws configure set default.region us-west-2 && aws configure set default.s3.max_concurrent_requests 50 \
 #AWS sam-local
-    && pip install aws-sam-cli \
+    && pip3 --no-cache-dir install aws-sam-cli \
 #Global NPM packages
-#ESLint
     && yarn global add eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard \
     && yarn global add lerna \
-    && yarn global add jest
+    && yarn global add jest \
+###Clean Up
+    && npm cache clean --force \
+    && yarn cache clean \
+    && rm /var/cache/apk/* \
+###Verify
+    && aws --version \
+    && sam --version \
+    && node --version \
+    && npm --version \
+    && yarn --version \
+    && parallel --version
