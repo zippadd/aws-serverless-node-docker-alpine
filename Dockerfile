@@ -13,11 +13,11 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repo
 #Parallel
     && apk add parallel \
 #AWS cli
-    && apk add python3 \
-    && pip3 --no-cache-dir install --upgrade pip setuptools \
-    && pip3 --no-cache-dir install awscli && aws configure set default.region us-west-2 && aws configure set default.s3.max_concurrent_requests 50 \
+    && apk add python py-pip \
+    && pip --no-cache-dir install --upgrade pip setuptools \
+    && pip --no-cache-dir install awscli && aws configure set default.region us-west-2 && aws configure set default.s3.max_concurrent_requests 50 \
 #AWS sam-local
-    && pip3 --no-cache-dir install aws-sam-cli \
+    && pip --no-cache-dir install aws-sam-cli \
 #Global NPM packages
     && yarn global add eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard \
     && yarn global add lerna \
