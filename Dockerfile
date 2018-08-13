@@ -12,6 +12,8 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repo
 ###Install new packages###
 #Parallel
     && apk add parallel \
+#Temp add gcc and tools
+    && apk add gcc python-dev libc6-compat linux-headers build-base \ 
 #AWS cli
     && apk add python py-pip \
     && pip --no-cache-dir install --upgrade pip setuptools \
@@ -23,6 +25,9 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repo
     && yarn global add lerna \
     && yarn global add jest \
 ###Clean Up
+#Remove temp packages
+    && apk del gcc python-dev libc6-compat linux-headers build-base \
+#Clean caches
     && npm cache clean --force \
     && yarn cache clean \
     && rm /var/cache/apk/* \
