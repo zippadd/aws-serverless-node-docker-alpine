@@ -21,7 +21,7 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repo
 #AWS sam-local
     && pip --no-cache-dir install aws-sam-cli \
 #Global NPM packages
-    && yarn global add eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard \
+    && yarn global add eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard eslint-plugin-react babel-eslint eslint-plugin-babel \
     && yarn global add lerna \
     && yarn global add jest \
 ###Clean Up
