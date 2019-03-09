@@ -13,20 +13,20 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repo
 #Parallel
     && apk add parallel \
 #Temp add gcc and tools
-    && apk add gcc python-dev libc6-compat linux-headers build-base \ 
+    && apk add gcc python3-dev libc6-compat linux-headers build-base \ 
 #AWS cli
-    && apk add python py-pip \
-    && pip --no-cache-dir install --upgrade pip setuptools \
-    && pip --no-cache-dir install awscli && aws configure set default.region us-west-2 && aws configure set default.s3.max_concurrent_requests 50 \
+    && apk add python3 \
+    && pip3 --no-cache-dir install --upgrade pip setuptools \
+    && pip3 --no-cache-dir install awscli && aws configure set default.region us-west-2 && aws configure set default.s3.max_concurrent_requests 50 \
 #AWS sam-local
-    && pip --no-cache-dir install aws-sam-cli \
+    && pip3 --no-cache-dir install aws-sam-cli \
 #Global NPM packages
     && yarn global add eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard eslint-plugin-react babel-eslint eslint-plugin-babel \
     && yarn global add lerna \
     && yarn global add jest \
 ###Clean Up
 #Remove temp packages
-    && apk del gcc python-dev libc6-compat linux-headers build-base \
+    && apk del gcc python3-dev libc6-compat linux-headers build-base \
 #Clean caches
     && npm cache clean --force \
     && yarn cache clean \
