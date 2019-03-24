@@ -4,6 +4,7 @@ FROM zippadd/node:8.10
 ###Update packages###
 RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
     && echo "@edgecommunity http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && export LC_ALL=C.UTF-8 && export LANG=C.UTF-8 \
     && apk update \
     && apk add --upgrade apk-tools@edge \
     && apk update \
@@ -22,7 +23,6 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repo
     && cmake . && make && make install \
     && cd .. \
     && rm master.zip && rm -Rf musl-locales-master \
-    && export LC_ALL=C.UTF-8 && export LANG=C.UTF-8 \
 #AWS cli
     && apk add python3 \
     && pip3 --no-cache-dir install --upgrade pip setuptools \
