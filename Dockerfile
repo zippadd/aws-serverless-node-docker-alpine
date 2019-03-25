@@ -1,8 +1,9 @@
 ###Match AWS Lambda Node Version
 FROM zippadd/node:8.10
 
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 ###Update packages###
 RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
