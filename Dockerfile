@@ -15,9 +15,10 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repo
     && npm install npm@latest -g \
 ###Install new packages###
 #Parallel
-    && apk add parallel \
+    && apk add --no-cache parallel \
+    && env_parallel --install \
 #Libintl
-    && apk add libintl \
+    && apk add --no-cache libintl \
 #Temp add gcc and tools
     && apk add gcc python3-dev libc6-compat linux-headers build-base cmake make musl-dev gettext-dev zip \
 #Compiled Binaries
