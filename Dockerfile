@@ -5,6 +5,8 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
+ENTRYPOINT ["/bin/sh", "-l"]
+
 ###Update packages###
 RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
     && echo "@edgecommunity http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
@@ -16,7 +18,8 @@ RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repo
 ###Install new packages###
 #Parallel
     && apk add --no-cache parallel \
-    && env_parallel --install \
+    && /usr/bin/env_parallel.sh --install \
+    && echo '. `which env_parallel.sh`' >> /etc/profile \
 #Libintl
     && apk add --no-cache libintl \
 #Temp add gcc and tools
