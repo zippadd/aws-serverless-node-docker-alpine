@@ -1,5 +1,5 @@
 ###Match AWS Lambda Node Version
-FROM zippadd/node:8.10
+FROM node:12-alpine
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
